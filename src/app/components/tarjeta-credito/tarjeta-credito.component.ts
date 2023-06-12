@@ -49,9 +49,15 @@ export class TarjetaCreditoComponent implements OnInit {
 
     //Pusheamos los datos en el listCard, y sacamos un modal que importamos con el toasttr
     this.listCard.push(tarjet);
-    this.toastr.success('Tarjeta Agregada con éxito.');
+    this.toastr.success('Tarjeta agregada con éxito.', 'Tarjeta Agregada');
     //Reseteamos el form
     this.form.reset();
     console.log(tarjet);
+  }
+
+  deleteCard(index: number){
+    //el .splice le pasamos la posición del index al dar click en borrar y le decimos que elimine solo esa posición
+    this.listCard.splice(index, 1)
+    this.toastr.error("La tarjeta fué eliminada con éxito.", "Tarjeta Eliminada")
   }
 }
