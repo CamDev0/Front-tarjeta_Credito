@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+//Importamos estos dos componentes para trabajar con el form
+import { FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-tarjeta-credito',
   templateUrl: './tarjeta-credito.component.html',
@@ -15,8 +19,35 @@ export class TarjetaCreditoComponent implements OnInit {
     {titular:'Héctor Cardenas', number: '3232343535353', expiracion:'10/27', cvv:'875'},
   ];
 
-  constructor(){}
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder){
+    this.form = this.fb.group({
+      titular: [''],
+      number: [''],
+      expiracion: [''],
+      cvv: [''],
+    })
+  }
   ngOnInit(): void {
       
+  }
+
+  agregarTarjeta(){
+    console.log(this.form);
+
+    //Obtenemos los valores que se ingresan en el form
+    const tarjet: any = {
+      titular: this.form.get('titular')?.value,
+      number: this.form.get('number')?.value,
+      expiracion: this.form.get('expiracion')?.value,
+      cvv: this.form.get('cvv')?.value
+    }
+
+    //Pusheamos los datos en el listCard, pa' que se vea en la página
+    this.listCard.push(tarjet);
+    //Reseteamos el form
+    this.form.reset();
+    console.log(tarjet);
   }
 }
