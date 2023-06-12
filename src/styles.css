@@ -20,3 +20,11 @@ background: linear-gradient(to right, #45a247, #283c86); /* W3C, IE 10+/ Edge, F
 .far{
     cursor: pointer;
 }
+
+.green-icon{
+    color: #198754;
+}
+
+.red-icon{
+    color: #dc3545;
+}

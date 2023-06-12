@@ -19,41 +19,52 @@
                     <!--Unimos este form con el que creamos en el .ts del componente-->
                     <form [formGroup] = "form" (ngSubmit)="agregarTarjeta()">
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                            <span class="input-group-text">
+                                <!--Accedemos a las propiedades del icono para cambiar el color en diferentes contextos-->
+                                <i class="fa-solid fa-user" 
+                                [class.green-icon] = "this.form.get('titular')?.valid"
+                                [class.red-icon] = "this.form.get('titular')?.invalid && this.form.get('titular')?.touched"></i>
+                            </span>
                             <!--Y conectamos los imputs con los campos que creamos en el .ts con formControlName-->
                             <input formControlName="titular" type="text" class="form-control" placeholder="Titular" >
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fa-solid fa-credit-card"></i></span>
-                            <input formControlName="number" type="text" class="form-control" placeholder="Número de Tarjeta">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-credit-card"
+                                [class.green-icon] = "this.form.get('number')?.valid"
+                                [class.red-icon] = "this.form.get('number')?.invalid && this.form.get('number')?.touched"></i>
+                            </span>
+                            <input formControlName="number" maxlength="16" type="text" class="form-control" placeholder="Número de Tarjeta">
                         </div>
                         
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-sharp fa-solid fa-circle-xmark"></i></span>
-                                    <input formControlName="expiracion" type="month" class="form-control" placeholder="Expiracion">
+                            <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-sharp fa-solid fa-circle-xmark"
+                                        [class.green-icon] = "this.form.get('expiracion')?.valid"
+                                        [class.red-icon] = "this.form.get('expiracion')?.invalid && this.form.get('expiracion')?.touched"></i>
+                                    </span>
+                                    <input formControlName="expiracion" maxlength="5" type="text" class="form-control" placeholder="MM/YY">
                                 </div>
-                            </div>
 
-                            <div class="col-lg-5">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                                    <input formControlName="cvv" type="password" class="form-control" placeholder="Cvv">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-key"
+                                        [class.green-icon] = "this.form.get('cvv')?.valid"
+                                        [class.red-icon] = "this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched"></i>
+                                    </span>
+                                    <input formControlName="cvv" maxlength="3" type="password" class="form-control" placeholder="CVV">
                                 </div>
-                            </div>
-                        </div>
                         
                         <div class="d-grid gap-2">
-                            <button class="btn btn-success">Agregar</button>
+                            <button [disabled]="this.form.invalid" class="btn btn-success">Agregar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col mt-4">
+        <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h5 class="tittle">List Card</h5>

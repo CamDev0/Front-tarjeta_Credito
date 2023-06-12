@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 //Importamos estos dos componentes para trabajar con el form
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-tarjeta-credito',
@@ -21,12 +21,14 @@ export class TarjetaCreditoComponent implements OnInit {
 
   form: FormGroup;
 
+  //En el constructor inicializamos y ponemos las validaciones
+
   constructor(private fb: FormBuilder){
     this.form = this.fb.group({
-      titular: [''],
-      number: [''],
-      expiracion: [''],
-      cvv: [''],
+      titular: ['', Validators.required],
+      number: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
+      expiracion: ['', [Validators.required, Validators.maxLength(5), Validators.minLength(4)]],
+      cvv: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
     })
   }
   ngOnInit(): void {
