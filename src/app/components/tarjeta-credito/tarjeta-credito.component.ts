@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 //Importamos estos dos componentes para trabajar con el form
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class TarjetaCreditoComponent implements OnInit {
 
   //En el constructor inicializamos y ponemos las validaciones
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private toastr: ToastrService){
     this.form = this.fb.group({
       titular: ['', Validators.required],
       number: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
@@ -46,8 +47,9 @@ export class TarjetaCreditoComponent implements OnInit {
       cvv: this.form.get('cvv')?.value
     }
 
-    //Pusheamos los datos en el listCard, pa' que se vea en la página
+    //Pusheamos los datos en el listCard, y sacamos un modal que importamos con el toasttr
     this.listCard.push(tarjet);
+    this.toastr.success('Tarjeta Agregada con éxito.');
     //Reseteamos el form
     this.form.reset();
     console.log(tarjet);
