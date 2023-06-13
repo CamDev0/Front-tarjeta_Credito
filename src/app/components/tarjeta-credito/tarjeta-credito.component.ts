@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 //Importamos estos dos componentes para trabajar con el form
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CardService } from 'src/app/services/card.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class TarjetaCreditoComponent implements OnInit {
 
   //En el constructor inicializamos y ponemos las validaciones
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService){
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private _cardService: CardService){
     this.form = this.fb.group({
       titular: ['', Validators.required],
       number: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
@@ -33,7 +34,16 @@ export class TarjetaCreditoComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+      this.getCard();
+  }
+
+  getCard(){
+    this._cardService.getListCard().subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
       
+    })
   }
 
   agregarTarjeta(){

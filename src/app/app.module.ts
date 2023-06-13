@@ -7,18 +7,21 @@ import { TarjetaCreditoComponent } from './components/tarjeta-credito/tarjeta-cr
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {HttpClientModule} from  '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
     TarjetaCreditoComponent
   ],
-  //Importamos el módulo reactivo para trabajar con el forms
+ 
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
