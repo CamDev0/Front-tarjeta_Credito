@@ -14,10 +14,10 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="tittle">Add Card</h5>
+                    <h5 class="tittle">Agg or Edit Card</h5>
                     <hr>
                     <!--Unimos este form con el que creamos en el .ts del componente-->
-                    <form [formGroup] = "form" (ngSubmit)="agregarTarjeta()">
+                    <form [formGroup] = "form" (ngSubmit)="saveTarjeta()">
                         <div class="input-group mb-3">
                             <span class="input-group-text">
                                 <!--Accedemos a las propiedades del icono para cambiar el color en diferentes contextos-->
@@ -57,7 +57,7 @@
                                 </div>
                         
                         <div class="d-grid gap-2">
-                            <button [disabled]="this.form.invalid" class="btn btn-success">Agregar</button>
+                            <button [disabled]="this.form.invalid" class="btn btn-success">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -81,18 +81,18 @@
                             </tr>
                             
                             <!--Iteramos los objetos creados en el array listCard en el .ts-->
+                            <!--i, accede a las posiciones del array con el "index"-->
 
                             <tr *ngFor="let card of listCard; let i = index">
                                 <td>{{card.titular }}</td>
-                                <td>{{card.number}}</td>
+                                <td>{{card.numberCard}}</td>
                                 <td>{{card.expiracion}}</td>
                                 <!-- <td>{{card.cvv}}</td> -->
                                 <td>
-                                    <i class="far fa-solid fa-pen-to-square text-info"></i>
+                                    <i (click)="editCards(card)" class="far fa-solid fa-pen-to-square text-info"></i>
                                 </td>
                                 <td>
-                                    <!--i, accede a las posiciones del array con el "index"-->
-                                    <i (click)="deleteCard(i)" class="far fa-solid fa-eraser text-danger"></i>
+                                    <i (click)="deleteCard(card.id)" class="far fa-solid fa-eraser text-danger"></i>
                                 </td>
                             </tr>
                         </tbody>
