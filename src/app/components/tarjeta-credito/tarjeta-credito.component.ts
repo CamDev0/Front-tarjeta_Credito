@@ -23,7 +23,7 @@ export class TarjetaCreditoComponent implements OnInit {
   constructor(private fb: FormBuilder, private toastr: ToastrService, private _cardService: CardService){
     this.form = this.fb.group({
       titular: ['', Validators.required],
-      number: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
+      numberCard: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
       expiracion: ['', [Validators.required, Validators.maxLength(5), Validators.minLength(4)]],
       cvv: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
     })
@@ -53,7 +53,7 @@ export class TarjetaCreditoComponent implements OnInit {
     //Obtenemos los valores que se ingresan en el form
     const tarjeta: any = {
       titular: this.form.get('titular')?.value,
-      number: this.form.get('number')?.value,
+      numberCard: this.form.get('numberCard')?.value,
       expiracion: this.form.get('expiracion')?.value,
       cvv: this.form.get('cvv')?.value
     }
@@ -62,6 +62,7 @@ export class TarjetaCreditoComponent implements OnInit {
     {
       //Agg nueva tarjeta
       this._cardService.saveCard(tarjeta).subscribe(data => {
+        console.log(data);
         this.toastr.success('Tarjeta agregada con éxito.', 'Tarjeta Agregada');
         this.getCard();
         this.form.reset();
@@ -93,7 +94,7 @@ export class TarjetaCreditoComponent implements OnInit {
     this.form.patchValue({
       
       titular: tarjeta.titular,
-      number: tarjeta.numberCard,
+      numberCard: tarjeta.numberCard,
       expiracion: tarjeta.expiracion,
       cvv: tarjeta.cvv
     })

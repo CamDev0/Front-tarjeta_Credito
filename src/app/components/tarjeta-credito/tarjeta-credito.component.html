@@ -32,10 +32,10 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">
                                 <i class="fa-solid fa-credit-card"
-                                [class.green-icon] = "this.form.get('number')?.valid"
-                                [class.red-icon] = "this.form.get('number')?.invalid && this.form.get('number')?.touched"></i>
+                                [class.green-icon] = "this.form.get('numberCard')?.valid"
+                                [class.red-icon] = "this.form.get('numberCard')?.invalid && this.form.get('numberCard')?.touched"></i>
                             </span>
-                            <input formControlName="number" maxlength="16" type="text" class="form-control" placeholder="Número de Tarjeta">
+                            <input formControlName="numberCard" maxlength="16" type="text" class="form-control" placeholder="Número de Tarjeta">
                         </div>
                         
                             <div class="input-group mb-3">
